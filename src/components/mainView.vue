@@ -4,21 +4,21 @@
       <v-row>
         <v-card class="balance">
           <v-card-title style="color:#bd1569">Balance</v-card-title>
-          <v-card-text v-text="sm">{{income-expence}}</v-card-text>
+          <v-card-text >{{income-expence}}</v-card-text>
         </v-card >
         
         <v-spacer></v-spacer>
 
         <v-card class="debit">
           <v-card-title style="color:#bd1569">Income</v-card-title>
-          <v-card-text v-text="sm">{{income}}</v-card-text>         
+          <v-card-text>{{income}}</v-card-text>         
         </v-card >
 
         <v-spacer></v-spacer>
 
         <v-card class="credit">
           <v-card-title style="color:#bd1569">Expence</v-card-title>
-          <v-card-text v-text="sm">{{expence}}</v-card-text>
+          <v-card-text>{{expence}}</v-card-text>
         </v-card>
       </v-row>
     </v-container>
@@ -37,7 +37,7 @@
         <v-spacer></v-spacer>
         <v-dialog
           v-model="dialog"
-          max-width="200px"
+          max-width="250px"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
@@ -50,11 +50,10 @@
               New Activity
             </v-btn>
           </template>
-          <v-card>
+          <v-card color="#bd1569">
             <v-card-title>
-              <span class="text-h5">New Activity</span>
+              <span class="text-h5" style="color:white">New Activity</span>
             </v-card-title>
-
             <v-card>
         <v-card-text>
           <v-container>
@@ -72,14 +71,13 @@
                 <v-text-field
                   v-model="nominal"
                   type = 'number'
-                  label="Nominal*"
+                  label="Nominal"
                   required
                 ></v-text-field>
               </v-col>
 
               <v-col
                 cols="10"
-                sm="4"
               >
                 <v-select
                   :items="['Income', 'Expence']"
@@ -91,8 +89,6 @@
 
               <v-col
                 cols="10"
-                sm="4"
-                md="2"
               >
                 <v-dialog
                   ref="dialog"
@@ -106,7 +102,7 @@
                       v-model="date"
                       label="Date"
                       prepend-icon="mdi-calendar"
-                      
+                      readonly
                       v-bind="attrs"
                       v-on="on"
                     ></v-text-field>
@@ -144,7 +140,11 @@
             Close
           </v-btn>
           <v-btn
+            dark
+            color="#bd1569"
             v-model='button'
+            type="submit"
+            :disabled='invalid'
             @click="addFinance()"
           >
             Save
